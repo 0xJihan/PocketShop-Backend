@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const CustomError = require('../errors');
+const userModel = require('../models/User');
 const {
   createTokenUser,
   attachCookiesToResponse,
@@ -24,7 +25,8 @@ const getSingleUser = async (req, res) => {
 
 
 const showCurrentUser = async (req, res) => {
-  res.json(req.user);
+  const user = await userModel.findById(req.user.userId).select('-password');
+  res.send(user);
 };
 
 const updateUser = async (req, res) => {
