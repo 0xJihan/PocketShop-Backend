@@ -51,6 +51,10 @@ app.use('/api/v1/products', productRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/orders', orderRouter);
 
+app.get('/', (req, res) => {
+    return res.send("Welcome to PocketShop Backend")
+});
+
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
