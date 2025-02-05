@@ -17,6 +17,7 @@ const helmet = require('helmet');
 const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const cors = require('cors');
+const path = require("node:path");
 
 const app = express();
 
@@ -38,9 +39,6 @@ app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
 app.use(cors());
-// we might need cors but remember 💡:
-// we send jwt with cookies, and cookies works if the frontend in the same domain of the server
-// so for that we might implement token instead of cookies, or search for another solution
 
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));

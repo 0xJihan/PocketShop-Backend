@@ -33,11 +33,7 @@ const reviewSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-// To make each user can only make 1 review per product, there're two solutions
-// 1- by indexing, and 2- from controller
-//
-// create a compound index on the product and user fields of the Review schema, and
-// ensuring that each combination of product and user is unique in the collection
+
 reviewSchema.index({ product: 1, user: 1 }, { unique: true });
 
 // .statics are similar to .methods, but the functions here are used by the schema not the instances
