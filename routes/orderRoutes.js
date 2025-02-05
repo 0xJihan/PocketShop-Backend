@@ -4,7 +4,6 @@ const {
   getAllOrders,
   getSingleOrder,
   getCurrentUserOrders,
-  updateOrder,
 } = require('../controllers/orderController');
 const {
   authorizePermissions,
@@ -22,7 +21,6 @@ router.route('/showAllMyOrders').get(authenticateUser, getCurrentUserOrders);
 
 router
   .route('/:id')
-  .get(authenticateUser, getSingleOrder)
-  .patch(authenticateUser, updateOrder);
+  .get(authenticateUser, getSingleOrder);
 
 module.exports = router;

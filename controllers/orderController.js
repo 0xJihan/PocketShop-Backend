@@ -87,26 +87,10 @@ const getCurrentUserOrders = async (req, res) => {
   res.json({ count: userOrders.length, orders: userOrders });
 };
 
-const updateOrder = async (req, res) => {
-  const order = await Order.findById(req.params.id);
-  const { paymentIntentId } = req.body;
-
-  if (!order) {
-    throw new CustomError.NotFoundError(`No Order with id: ${req.params.id}`);
-  }
-  checkPermissions({ requestUser: req.user, resourceUserId: order.user });
-
-  order.paymentIntentId = paymentIntentId;
-  order.status = 'paid';
-  await order.save();
-
-  res.json({ order });
-};
 
 module.exports = {
   createOrder,
   getAllOrders,
   getSingleOrder,
   getCurrentUserOrders,
-  updateOrder,
 };
