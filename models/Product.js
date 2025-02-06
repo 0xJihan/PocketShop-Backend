@@ -76,8 +76,8 @@ const productSchema = new mongoose.Schema(
 );
 
 // next() became optional in mongoose
-productSchema.pre('deleteOne', async function () {
-  await this.model('Review').deleteMany({ product: this._id });
+productSchema.pre('deleteOne', { document: true, query: false }, async function() {
+    await this.model('Review').deleteMany({ product: this._id });
 });
 
 productSchema.virtual('reviews', {
